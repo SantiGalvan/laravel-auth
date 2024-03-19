@@ -16,8 +16,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Rotta home guest
 Route::get('/', GuestHomeController::class)->name('guest.home');
 
+// Rotta home admin
 Route::get('/admin', AdminHomeController::class)->middleware(['auth', 'verified'])->name('admin.home');
 
 Route::middleware('auth')->group(function () {
