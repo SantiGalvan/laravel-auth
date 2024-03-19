@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('title', 50)->unique();
             $table->text('description')->nullable();
-            $table->string('languages');
-            $table->string('frameworks')->nullable();
+            $table->string('language');
+            $table->string('framework')->nullable();
             $table->string('image')->nullable();
             $table->timestamps();
             $table->softDeletes();
