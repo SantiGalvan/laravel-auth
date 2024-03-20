@@ -48,6 +48,12 @@
                 @endforelse
             </tbody>
           </table>
+
+          <!-- Pagination -->
+          @if($projects->hasPages())
+            {{$projects->links()}}
+          @endif
+          
     </section>
 @endsection
 
