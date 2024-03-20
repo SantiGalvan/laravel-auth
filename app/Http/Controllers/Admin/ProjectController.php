@@ -40,7 +40,7 @@ class ProjectController extends Controller
 
         $project->save();
 
-        return to_route('admin.projects.show', $project->id)->with('type', 'success')->with('message', 'nuovo progetto aggiunto');
+        return to_route('admin.projects.show', $project->id)->with('type', 'success')->with('message', 'Progetto aggiunto');
     }
 
     /**
@@ -64,7 +64,11 @@ class ProjectController extends Controller
      */
     public function update(Request $request, Project $project)
     {
-        //
+        $data = $request->all();
+
+        $project->update($data);
+
+        return to_route('admin.projects.show', $project->id)->with('type', 'success')->with('message', 'Progetto modificato');
     }
 
     /**
