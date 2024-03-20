@@ -14,25 +14,25 @@
                 <div class="col">
                     <div class="mb-3">
                         <label for="title" class="form-label">Titolo</label>
-                        <input value="{{old('title', '')}}" type="text" class="form-control" id="title">
+                        <input value="{{old('title', '')}}" type="text" class="form-control" id="title" name="title">
                     </div>
                 </div>
                 <div class="col-3">
                     <div class="mb-3">
                         <label for="language" class="form-label">Linguaggio</label>
-                        <input value="{{old('language', '')}}" type="email" class="form-control" id="language" name="language">
+                        <input value="{{old('language', '')}}" type="text" class="form-control" id="language" name="language">
                     </div>
                 </div>
                 <div class="col-3">
                     <div class="mb-3">
                         <label for="framework" class="form-label">Tecnologia Usata</label>
-                        <input value="{{old('framework', '')}}" type="email" class="form-control" id="framework" name="framework">
+                        <input value="{{old('framework', '')}}" type="text" class="form-control" id="framework" name="framework">
                     </div>
                 </div>
                 <div class="col-11">
                     <div class="mb-3">
                         <label for="image" class="form-label">Immagine</label>
-                        <input value="{{old('image', '')}}" type="email" class="form-control" id="image" name="image">
+                        <input value="{{old('image', '')}}" type="url" class="form-control" id="image" name="image">
                     </div>
                 </div>
                 <div class="col-1">
@@ -53,4 +53,16 @@
             </div>
         </form>
     </section>
+@endsection
+
+@section('scripts')
+    <script>
+        const placeholder = 'https://marcolanci.it/boolean/assets/placeholder.png';
+        const input = document.getElementById('image');
+        const preview = document.getElementById('preview');
+
+        input.addEventListener('input', () => {
+            preview.src = input.value || placeholder;
+        })
+    </script>
 @endsection
