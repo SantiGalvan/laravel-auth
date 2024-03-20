@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 
 // Rotta home guest
 Route::get('/', GuestHomeController::class)->name('guest.home');
+// rotta show guest
 Route::get('/projects/{project}', [GuestProjectController::class, 'show'])->name('guest.projects.show');
 
 
