@@ -36,8 +36,9 @@
         @include('includes.layouts.navbar')
 
         <main class="container">
-
-            @include('includes.alert')
+    
+            <!-- Alert -->
+            @include('includes.alerts')
 
             @yield('content')
         </main>
