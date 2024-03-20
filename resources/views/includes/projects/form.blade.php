@@ -13,25 +13,53 @@
         <div class="col">
             <div class="mb-3">
                 <label for="title" class="form-label">Titolo</label>
-                <input value="{{old('title', $project->title)}}" type="text" class="form-control" id="title" name="title">
+                <input value="{{old('title', $project->title)}}" type="text" class="form-control @error('title') is-invalid @elseif(old('title', '')) is-valid @enderror" id="title" name="title">
+                @error('title')   
+                    <div class="invalid-feedback">{{$message}}</div>
+                @else
+                    <div class="form-text">
+                        Inserisci il titolo del progetto
+                    </div>
+                @enderror
             </div>
         </div>
         <div class="col-3">
             <div class="mb-3">
                 <label for="language" class="form-label">Linguaggio</label>
-                <input value="{{old('language', $project->language)}}" type="text" class="form-control" id="language" name="language">
+                <input value="{{old('language', $project->language)}}" type="text" class="form-control @error('language') is-invalid @elseif(old('language', '')) is-valid @enderror" id="language" name="language">
+                @error('language')   
+                    <div class="invalid-feedback">{{$message}}</div>
+                @else
+                    <div class="form-text">
+                        Inserisci il linguaggio del progetto
+                    </div>
+                @enderror
             </div>
         </div>
         <div class="col-3">
             <div class="mb-3">
                 <label for="framework" class="form-label">Tecnologia Usata</label>
-                <input value="{{old('framework', $project->framework)}}" type="text" class="form-control" id="framework" name="framework">
+                <input value="{{old('framework', $project->framework)}}" type="text" class="form-control @error('framework') is-invalid @elseif(old('framework', '')) is-valid @enderror" id="framework" name="framework">
+                @error('framework')   
+                    <div class="invalid-feedback">{{$message}}</div>
+                @else
+                    <div class="form-text">
+                        Inserisci la tecnologia usata nel progetto
+                    </div>
+                @enderror
             </div>
         </div>
         <div class="col-11">
             <div class="mb-3">
                 <label for="image" class="form-label">Immagine</label>
-                <input value="{{old('image', $project->image)}}" type="url" class="form-control" id="image" name="image">
+                <input value="{{old('image', $project->image)}}" type="url" class="form-control @error('image') is-invalid @elseif(old('image', '')) is-valid @enderror" id="image" name="image">
+                @error('image')   
+                    <div class="invalid-feedback">{{$message}}</div>
+                @else
+                    <div class="form-text">
+                        Inserisci l'url dell'immagine del progetto
+                    </div>
+                @enderror
             </div>
         </div>
         <div class="col-1">
@@ -42,7 +70,14 @@
         <div class="col-12">
             <div class="mb-3">
                 <label for="description" class="form-label">Descrizione progetto</label>
-                <textarea class="form-control" id="description" name="description" rows="10">{{old('description', $project->description)}}</textarea>
+                <textarea class="form-control @error('description') is-invalid @elseif(old('description', '')) is-valid @enderror" id="description" name="description" rows="10">{{old('description', $project->description)}}</textarea>
+                @error('description')   
+                    <div class="invalid-feedback">{{$message}}</div>
+                @else
+                    <div class="form-text">
+                        Inserisci una descrizione del progetto
+                    </div>
+                @enderror
             </div>
         </div>
     </div>
