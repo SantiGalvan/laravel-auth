@@ -20,14 +20,7 @@
                     <div><strong>Framework:</strong> {{$project->framework}}</div>
                     <div class="mt-2"><strong>Creato il:</strong> {{$project->created_at}}</div>
                     <div><strong>Ultima modifica:</strong> {{$project->updated_at}}</div>
-                    <div class="mt-4"><a href="" class="btn btn-lg btn-primary"><i class="fa-solid fa-magnifying-glass me-2"></i>Vedi</a></div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        {{-- <p class="lead">{{$project->description}}</p> --}}
-                    </div>
-                    <div class="col-3">
-                    </div>
+                    <div class="mt-4"><a href="{{route('projects.show', $project->id)}}" class="btn btn-lg btn-primary"><i class="fa-solid fa-magnifying-glass me-2"></i>Vedi</a></div>
                 </div>
             </div>
         </div>
