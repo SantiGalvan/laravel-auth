@@ -21,7 +21,7 @@
             </div>
             <footer class="d-flex justify-content-between align-items-center">
                 <a href="{{route('admin.projects.index')}}" class="btn btn-secondary"><i class="fas fa-arrow-left me-2"></i>Torna indietro</a>
-                <div class="d-flex justify-content-between gap-2">
+                <div class="d-flex justify-content-between gap-2 mt-4">
                     <a href="{{route('admin.projects.edit', $project->id)}}" class="btn btn-warning"><i class="fas fa-pencil me-2"></i>Modifica</a>
                     <form action="{{route('admin.projects.destroy', $project->id)}}" method="POST" class="delete-form">
                         @csrf
