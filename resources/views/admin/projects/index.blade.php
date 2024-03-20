@@ -10,6 +10,8 @@
 
         <h1 class="my-4">Progetti</h1>
 
+        <a href="{{route('admin.projects.trash')}}" class="btn btn-danger"><i class="fas fa-trash me-2"></i>Vai al cestino</a>
+
       </div>
 
         <table class="table table-dark">
