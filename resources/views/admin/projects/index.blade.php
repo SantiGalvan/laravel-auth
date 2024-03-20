@@ -31,7 +31,7 @@
                         <div class="d-flex justify-content-end align-items-center gap-2">
                             <a href="{{route('admin.projects.show', $project->id)}}" class="btn btn-sm btn-primary"><i class="fas fa-eye"></i></a>
                             <a href="{{route('admin.projects.edit', $project->id)}}" class="btn btn-sm btn-warning"><i class="fas fa-pencil"></i></a>
-                            <form action="{{route('admin.projects.destroy', $project->id)}}" method="POST">
+                            <form action="{{route('admin.projects.destroy', $project->id)}}" method="POST" class="delete-form">
                                 @csrf
                                 @method('DELETE')
                                 <button class="btn btn-sm btn-danger"><i class="fas fa-trash-can"></i></button>
@@ -49,4 +49,8 @@
             </tbody>
           </table>
     </section>
+@endsection
+
+@section('scripts')
+  @vite('resources/js/delete_confirmation.js')
 @endsection
