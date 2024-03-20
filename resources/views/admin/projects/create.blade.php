@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
-@section('title', 'Crea Post')
+@section('title', 'Crea Progetto')
 
 @section('content')
     <section id="create-project">
         <div class="d-flex align-items-center justify-content-between">
             <a href="{{route('admin.projects.index')}}" class="btn btn-secondary"><i class="fas fa-arrow-left me-2"></i>Torna alla lista</a>
-            <h1 class="my-4">Crea nuovo Progetto</h1>
+            <h1 class="my-4">Crea Progetto</h1>
         </div>
         <form action="{{route('admin.projects.store')}}" method="POST">
             @csrf
@@ -37,7 +37,7 @@
                 </div>
                 <div class="col-1">
                     <div class="mb-3">
-                        <img src="https://marcolanci.it/boolean/assets/placeholder.png" alt="immagine del progetto" class="img-fluid" id="preview">
+                        <img src="{{old('image', 'https://marcolanci.it/boolean/assets/placeholder.png')}}" alt="immagine del progetto" class="img-fluid" id="preview">
                     </div>
                 </div>
                 <div class="col-12">
