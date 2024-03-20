@@ -4,7 +4,13 @@
 
 @section('content')
     <section id="table-projects">
-        <h1 class="text-center my-4">Projects</h1>
+      <div class="d-flex align-items-center justify-content-between">
+
+        <a href="{{route('admin.projects.create')}}" class="btn btn-secondary"><i class="fas fa-plus me-2"></i>Crea Progetto</a>
+
+        <h1 class="my-4">Progetti</h1>
+
+      </div>
 
         <table class="table table-dark">
             <thead>
