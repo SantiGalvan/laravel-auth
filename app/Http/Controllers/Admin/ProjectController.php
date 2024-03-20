@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
+use Illuminate\Validation\Rule;
 
 class ProjectController extends Controller
 {
@@ -34,6 +34,25 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
+
+        $request->validate(
+            [
+                'title' => 'required|unique:projects|string|min:5|max:50',
+                'language' => 'required|string',
+                'framework' => 'nullable|string',
+                'image' => 'nullable|url',
+                'description' => 'nullable|string'
+            ],
+            [
+                'title.required' => 'Il titolo è obbligatorio',
+                'title.min' => 'Il titolo non può essere più corto di :min caratteri',
+                'title.max' => 'Il titolo non può essere più lungo di :max caratteri',
+                'title.unique' => 'Titolo già inserito, riprova con un altro titolo',
+                'image.url' => 'L\'indirizzo inserito non è valido',
+                'language.required' => 'Il linguaggio usato è obbligatorio',
+            ]
+        );
+
         $data = $request->all();
 
         $project = new Project();
@@ -66,6 +85,26 @@ class ProjectController extends Controller
      */
     public function update(Request $request, Project $project)
     {
+
+        $request->validate(
+            [
+                'title' => ['required', 'string', 'min:5', 'max:50', Rule::unique('projects')->ignore($project->id)],
+                'language' => 'required|string',
+                'framework' => 'nullable|string',
+                'image' => 'nullable|url',
+                'description' => 'nullable|string'
+            ],
+            [
+                'title.required' => 'Il titolo è obbligatorio',
+                'title.min' => 'Il titolo non può essere più corto di :min caratteri',
+                'title.max' => 'Il titolo non può essere più lungo di :max caratteri',
+                'title.unique' => 'Titolo già inserito, riprova con un altro titolo',
+                'image.url' => 'L\'indirizzo inserito non è valido',
+                'language.required' => 'Il linguaggio usato è obbligatorio',
+            ]
+        );
+
+
         $data = $request->all();
 
         $project->update($data);
