@@ -66,6 +66,6 @@ class ProjectController extends Controller
     {
         $project->delete();
 
-        return to_route('admin.projects.index')->with('type', 'danger')->with('message', 'Post eliminato con successo');
+        return to_route('admin.projects.index')->with('type', 'danger')->with('message', 'Progetto eliminato con successo');
     }
 }
