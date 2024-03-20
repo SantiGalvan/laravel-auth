@@ -25,8 +25,8 @@
                     <td>{{$project->title}}</td>
                     <td>{{$project->language}}</td>
                     <td>{{$project->framework}}</td>
-                    <td>{{$project->created_at}}</td>
-                    <td>{{$project->updated_at}}</td>
+                    <td>{{$project->getFormattedDate('created_at', 'd-m-Y H:i:s ')}}</td>
+                    <td>{{$project->getFormattedDate('updated_at', 'd-m-Y H:i:s ')}}</td>
                     <td>
                         <div class="d-flex justify-content-end align-items-center gap-2">
                             <a href="{{route('admin.projects.show', $project->id)}}" class="btn btn-sm btn-primary"><i class="fas fa-eye"></i></a>
