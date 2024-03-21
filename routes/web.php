@@ -31,16 +31,16 @@ Route::prefix('/admin')->name('admin.')->middleware('auth')->group(function () {
 
     // Rotte per il cestino
     route::get('/projects/trash', [AdminProjectController::class, 'trash'])->name('projects.trash');
-    route::patch('/projects/{{project}}/restore', [AdminProjectController::class, 'restore'])->name('projects.restore');
-    route::delete('/projects/{{project}}/drop', [AdminProjectController::class, 'drop'])->name('projects.drop');
+    route::patch('/projects/{project}/restore', [AdminProjectController::class, 'restore'])->name('projects.restore');
+    route::delete('/projects/{project}/drop', [AdminProjectController::class, 'drop'])->name('projects.drop');
 
     // Rotte Admin project CRUD
     Route::get('/projects', [AdminProjectController::class, 'index'])->name('projects.index');
     Route::get('/projects/create', [AdminProjectController::class, 'create'])->name('projects.create');
-    Route::get('/projects/{project}', [AdminProjectController::class, 'show'])->name('projects.show');
+    Route::get('/projects/{project}', [AdminProjectController::class, 'show'])->name('projects.show')->withTrashed();
     Route::post('/projects', [AdminProjectController::class, 'store'])->name('projects.store');
-    Route::get('/projects/{project}/edit', [AdminProjectController::class, 'edit'])->name('projects.edit');
-    Route::put('/projects/{project}', [AdminProjectController::class, 'update'])->name('projects.update');
+    Route::get('/projects/{project}/edit', [AdminProjectController::class, 'edit'])->name('projects.edit')->withTrashed();
+    Route::put('/projects/{project}', [AdminProjectController::class, 'update'])->name('projects.update')->withTrashed();
     Route::delete('/projects/{project}', [AdminProjectController::class, 'destroy'])->name('projects.destroy');
 
     // Rotta Admin project CRUD generale
