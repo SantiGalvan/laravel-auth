@@ -121,4 +121,26 @@ class ProjectController extends Controller
 
         return to_route('admin.projects.index')->with('type', 'danger')->with('message', 'Progetto eliminato con successo');
     }
+
+    public function trash()
+    {
+        $projects = Project::onlyTrashed()->paginate(10);
+        return view('admin.projects.trash', compact('projects'));
+    }
+
+    public function restore(string $id)
+    {
+        $project = Project::onlyTrashed()->findOrFail($id);
+        $project->restore();
+
+        return to_route('admin.projects.index')->with('type', 'success')->with('message', 'Progetto ripristinato con successo');
+    }
+
+    public function drop(string $id)
+    {
+        $project = Project::onlyTrashed()->findOrFail($id);
+        $project->forceDelete();
+
+        return to_route('admin.projects.trash')->with('type', 'danger')->with('message', 'Progetto eliminato definitivamente');
+    }
 }
