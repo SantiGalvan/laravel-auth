@@ -64,7 +64,7 @@
         </div>
         <div class="col-1">
             <div class="mb-3">
-                <img src="{{old('image', $project->image ?? 'https://marcolanci.it/boolean/assets/placeholder.png')}}" alt="immagine del progetto" class="img-fluid" id="preview">
+                <img src="{{old('image', $project->image) ? asset('storage/'. $project->image) : 'https://marcolanci.it/boolean/assets/placeholder.png'}}" alt="immagine del progetto" class="img-fluid" id="preview">
             </div>
         </div>
         <div class="col-12">
