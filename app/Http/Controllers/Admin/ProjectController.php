@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 
 class ProjectController extends Controller
@@ -40,7 +42,7 @@ class ProjectController extends Controller
                 'title' => 'required|unique:projects|string|min:5|max:50',
                 'language' => 'required|string',
                 'framework' => 'nullable|string',
-                'image' => 'nullable|url',
+                'image' => 'nullable|image|mimes:png,jpg,jpeg',
                 'description' => 'nullable|string'
             ],
             [
@@ -48,7 +50,7 @@ class ProjectController extends Controller
                 'title.min' => 'Il titolo non può essere più corto di :min caratteri',
                 'title.max' => 'Il titolo non può essere più lungo di :max caratteri',
                 'title.unique' => 'Titolo già inserito, riprova con un altro titolo',
-                'image.url' => 'L\'indirizzo inserito non è valido',
+                'image.image' => 'Il file inserito non è un\'immagine',
                 'language.required' => 'Il linguaggio usato è obbligatorio',
             ]
         );
@@ -58,6 +60,13 @@ class ProjectController extends Controller
         $project = new Project();
 
         $project->fill($data);
+
+        if (Arr::exists($data, 'image')) {
+            $extension = $data['image']->extension();
+
+            $img_url = Storage::putFileAs('post_image', $data['image'], "$project->title.$extension");
+            $project->image = $img_url;
+        }
 
         $project->save();
 
@@ -91,7 +100,7 @@ class ProjectController extends Controller
                 'title' => ['required', 'string', 'min:5', 'max:50', Rule::unique('projects')->ignore($project->id)],
                 'language' => 'required|string',
                 'framework' => 'nullable|string',
-                'image' => 'nullable|url',
+                'image' => 'nullable|image|mimes:png,jpg,jpeg',
                 'description' => 'nullable|string'
             ],
             [
@@ -99,13 +108,23 @@ class ProjectController extends Controller
                 'title.min' => 'Il titolo non può essere più corto di :min caratteri',
                 'title.max' => 'Il titolo non può essere più lungo di :max caratteri',
                 'title.unique' => 'Titolo già inserito, riprova con un altro titolo',
-                'image.url' => 'L\'indirizzo inserito non è valido',
+                'image.image' => 'Il file inserito non è un\'immagine',
                 'language.required' => 'Il linguaggio usato è obbligatorio',
             ]
         );
 
 
         $data = $request->all();
+
+        if (Arr::exists($data, 'image')) {
+
+            if ($project->image) Storage::delete($project->image);
+
+            $extension = $data['image']->extension();
+
+            $img_url = Storage::putFileAs('post_image', $data['image'], "$project->title.$extension");
+            $project->image = $img_url;
+        }
 
         $project->update($data);
 
@@ -139,6 +158,9 @@ class ProjectController extends Controller
     public function drop(string $id)
     {
         $project = Project::onlyTrashed()->findOrFail($id);
+
+        if ($project->image) Storage::delete($project->image);
+
         $project->forceDelete();
 
         return to_route('admin.projects.trash')->with('type', 'danger')->with('message', 'Progetto eliminato definitivamente');
